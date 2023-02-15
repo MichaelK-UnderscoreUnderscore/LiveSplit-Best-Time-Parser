@@ -22,7 +22,7 @@ class App(tk.Frame):
         self.min_runid_entry = tk.Entry(self,textvariable=self.min_runid_string,validate="key",validatecommand=self.validate_int,width=5)
         self.min_runid_entry.grid(row=0,column=2)
 
-        self.gametime_check = True
+        self.gametime_check = False
         self.gametime_checkbox = tk.Checkbutton(self,text="GameTime",indicatoron=True, variable=self.gametime_check)
         self.gametime_checkbox.grid(row=0, column=3)
 
