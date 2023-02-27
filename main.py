@@ -22,8 +22,9 @@ class App(tk.Frame):
         self.min_runid_entry = tk.Entry(self,textvariable=self.min_runid_string,validate="key",validatecommand=self.validate_int,width=5)
         self.min_runid_entry.grid(row=0,column=2)
 
-        self.gametime_check = False
-        self.gametime_checkbox = tk.Checkbutton(self,text="GameTime",indicatoron=True, variable=self.gametime_check)
+        self.gametime_check = tk.BooleanVar()
+        self.gametime_check.set(False)
+        self.gametime_checkbox = tk.Checkbutton(self,text="GameTime",indicatoron=True,variable=self.gametime_check, onvalue=True, offvalue=False)
         self.gametime_checkbox.grid(row=0, column=3)
 
         self.output_textbox = tk.Text(self,width=45)
@@ -51,12 +52,12 @@ class App(tk.Frame):
         except:
             minID = 0
         try:
-            if self.gametime_check:
+            if self.gametime_check.get():
                 self.lss_parse(lss_path, "GameTime", minID)
             else:
                 self.lss_parse(lss_path, "RealTime", minID)
         except:
-            self.output_textbox.replace('1.0','end',"Error")
+            self.output_textbox.replace('1.0',tk.END,"Error")
 
 
 
@@ -96,7 +97,7 @@ class App(tk.Frame):
             if int(best_segment_run_IDs[count]) > min_id:
                 out = out + "\n" + segment_names[count] + "\nRun: " + best_segment_run_IDs[count] + " started at: " + attempt_history[best_segment_run_IDs[count]] + " UTC\nSection time: " + best_times[count] + "\n"    
             count += 1
-        self.output_textbox.replace('1.0','end',out)
+        self.output_textbox.replace('1.0',tk.END,out)
 
 
 
